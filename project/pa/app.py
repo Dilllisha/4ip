@@ -66,7 +66,7 @@ ___gpt = APIRouter(prefix='/api/gpt/stream')
 @___gpt.post('/')
 async def gpt_stream(data: dict):
     async def generate():
-        async for chunk in data["gpt"].create_async_generator(messages=[{"role": "user", "content": data["query"]}]):
+        async for chunk in ChatBase.create_async_generator(messages=[{"role": "user", "content": data["query"]}]):
             yield chunk
 
     return StreamingResponse(generate(), media_type="text/event-stream")
