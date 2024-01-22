@@ -2,7 +2,7 @@ from fastapi import FastAPI
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 
-from routers.gpt import ___gpt
+from routers.gpt import *
 
 routers_variables = [value for key, value in globals().items() if key.startswith("___")]
 
