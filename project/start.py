@@ -1,5 +1,6 @@
 from pa.app import *
 from vol.vkbot import *
+import asyncio
 
 print('готово')
 
