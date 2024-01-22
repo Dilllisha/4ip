@@ -120,5 +120,3 @@ def bot():
                 if text == "стоп":
                     chat_gpt_button = False
                     sender(user_id, "Вы закончили диалог с ботом chat-gpt")
-if __name__ == "__main__":
-    bot()
