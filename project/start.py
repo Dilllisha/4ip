@@ -6,12 +6,11 @@ from multiprocessing import Process
 def start():
     uvicorn.run(app, host="0.0.0.0", port=80)
     print("site online")
-if __name__ == '__main__':
-    p = Process(target=bot)
-    b = Process(target=start)
-    p.start()
-    b.start()
-    print("all loaded")
+    
+vkbot = Process(target=bot())
+server = Process(target=start())
+vkbot.start()
+server.start()
 
 
 
