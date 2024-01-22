@@ -4,21 +4,7 @@ import asyncio
 
 print('готово')
 
-loop = asyncio.get_event_loop()
-
-async def test1():
-    uvicorn.run(app, host="0.0.0.0", port=80)
-
-async def test2():
-    bot()
-
-futures = [
-    asyncio.ensure_future(test1()),
-    asyncio.ensure_future(test2())
-]
-
-loop.run_until_complete(asyncio.gather(*futures))
-loop.close()
+uvicorn.run(app, host="0.0.0.0", port=80)
 
 
 
