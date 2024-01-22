@@ -37,6 +37,7 @@ def sender(id, msg, keyboard=None):
 
 print("Бот запущен -", current_time)
 
+
 def gpt(text):
     try:
         response = openai.chat.completions.create(
@@ -47,33 +48,13 @@ def gpt(text):
             temperature=0
         )
         sender(user_id, response.choices[0].message.content)
+
     except:
         sender(user_id, "что-то пошло не так")
 
 
-def weathers(text):
-    try:
-        observation = mgr.weather_at_place(text)
-        w = observation.weather
-        temperature = w.temperature('celsius')['temp']
-        weather = w.status.lower()
-        wind = w.wind()['speed']
-        humi = w.humidity
-        if weather == "snow":
-            weather = "снег"
-        elif weather == "clouds":
-            weather = "облачно"
-        elif weather == "rain":
-            weather = "дождь"
-
-        ad = (f"По запросу города {text} найдено:\n Температура: {temperature}℃"
-              f"\n Погода: {weather}\n Ветер: {wind} м/с\n Влажность: {humi}%")
-        sender(user_id, ad)
-    except:
-        sender(user_id, "Не получилось найти погоду по вашему городу")
-
 chat_gpt_button = False
-weather_button = False
+
 
 for event in longpoll.listen():
     if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
@@ -81,41 +62,25 @@ for event in longpoll.listen():
         user_id = event.user_id
         random_id = random.getrandbits(64)
 
-        if not chat_gpt_button:
-            if text == "привет":
-                sender(user_id, "Здарова")
+        if text == "привет":
+            sender(user_id, "Здарова")
 
-            elif text == "меню":
-                keyboard = VkKeyboard(inline=True)
-                buttons = ["Погода", "gpt"]
-                buttons_colors = [VkKeyboardColor.PRIMARY, VkKeyboardColor.NEGATIVE]
-                for btn, btn_color in zip(buttons, buttons_colors):
-                    keyboard.add_button(btn, btn_color)
-                sender(user_id, "Выберите что-то из предложенного списка", keyboard)
+        elif text == "меню":
+            keyboard = VkKeyboard(inline=True)
+            buttons = ["Погода", "gpt"]
+            buttons_colors = [VkKeyboardColor.PRIMARY, VkKeyboardColor.NEGATIVE]
+            for btn, btn_color in zip(buttons, buttons_colors):
+                keyboard.add_button(btn, btn_color)
+            sender(user_id, "Выберите что-то из предложенного списка", keyboard)
 
-            elif text == "погода":
-                sender(user_id, "Введите название города")
-                weather_button = True
-
-            elif weather_button:
-                if text != 'погода':
-                    weathers(text)
-                    weather_button = False
-
-            elif text == "gpt":
-                sender(user_id, "Здравствуйте, вы можете задать любой вопрос боту chat-gpt. Для завершения диалога с ботом напишите 'стоп' ")
-                chat_gpt_button = True
-
-            elif text == "шумерля":
-                weathers(text)
-
-            else:
-                sender(user_id, "Не понимаю о чем вы")
-
-        if chat_gpt_button:
-            if text != "gpt":
-                if text != "стоп":
-                    gpt(text)
-            if text == "стоп":
-                chat_gpt_button = False
-                sender(user_id, "Вы закончили диалог с ботом chat-gpt")
+        elif text == "gpt":
+            sender(user_id, "Здравствуйте, вы можете задать любой вопрос боту chat-gpt. Для завершения диалога с ботом напишите 'стоп' ")
+            for event in longpoll.listen():
+                if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
+                    if text != "gpt":
+                        if text != "стоп":
+                            gpt(text)
+                        if text == "стоп":
+                            pass
+        else:
+            sender(user_id, "Не понимаю о чем вы")
