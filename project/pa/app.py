@@ -85,6 +85,3 @@ app.add_middleware(
     allow_headers=headers)
 
 app.include_router(___gpt)
-
-if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=80)
