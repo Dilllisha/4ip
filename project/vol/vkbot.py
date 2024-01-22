@@ -9,16 +9,17 @@ import openai
 
 
 
-session = vk_api.VkApi(token="vk1.a.9wLYO2cuHKbWPZtWC51ssEzH12w-BIa_urRqKMM2E23COzqiWAZK8jOVPBeaVXHcWWDKCINwYg96pl0p_zw6uqMXfiddkTfu_ES7hgHydHfxgYbZrjv6jreK_qGM7Mf0DavzFaZFQIdzObNHPRM4X1pdxmZxu6fcDLvGKlGTperd3inqh6LYY9vHmVBWmwk4zl8Bb4iKYHWqiA-GkCgxYg")
-longpoll = VkLongPoll(session)
-vk = session.get_api()
-openai.api_key = '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'
-owm = OWM('d6901b7f0e58a81b6e3b55dc1f85fb1e')
-mgr = owm.weather_manager()
-now = datetime.now()
-current_time = now.strftime("%H:%M:%S")
+
     
 def bot():
+	session = vk_api.VkApi(token="vk1.a.9wLYO2cuHKbWPZtWC51ssEzH12w-BIa_urRqKMM2E23COzqiWAZK8jOVPBeaVXHcWWDKCINwYg96pl0p_zw6uqMXfiddkTfu_ES7hgHydHfxgYbZrjv6jreK_qGM7Mf0DavzFaZFQIdzObNHPRM4X1pdxmZxu6fcDLvGKlGTperd3inqh6LYY9vHmVBWmwk4zl8Bb4iKYHWqiA-GkCgxYg")
+	longpoll = VkLongPoll(session)
+	vk = session.get_api()
+	openai.api_key = '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'
+	owm = OWM('d6901b7f0e58a81b6e3b55dc1f85fb1e')
+	mgr = owm.weather_manager()
+	now = datetime.now()
+	current_time = now.strftime("%H:%M:%S")
 	def sender(id, msg, keyboard=None):
 	
 		post = {
