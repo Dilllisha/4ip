@@ -87,4 +87,4 @@ app.add_middleware(
 app.include_router(___gpt)
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=80, reload=True)
+    uvicorn.run("app:app", host="0.0.0.0", port=80)
