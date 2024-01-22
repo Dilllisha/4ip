@@ -25,7 +25,7 @@ def bot():
 		post = {
 			"user_id": id,
 			"message": msg,
-			"random_id": 0,
+			"random_id": get_random_id(),
 		}
 	
 		if keyboard != None:
