@@ -1,14 +1,10 @@
 # from pa.app import *
 from vol.vkbot import *
 from rom.bot import *
-from asyncio import create_task, run
+from threading import Thread
 
-async def main():
-    task_1 = create_task(bot(chat_gpt_button,weather_button).start())
-    task_2 = create_task(botik().start())
+th_bot = Thread(target=bot, args=())
+th_userbot = Thread(target=bo, args=())
 
-    await task_1
-    await task_2
-
-if __name__ == '__main__':
-    run(main())
+th_userbot.start()
+th_bot.start()
