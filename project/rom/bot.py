@@ -6,6 +6,7 @@ from datetime import datetime
 from vk_api.utils import get_random_id
 
 def botik():
+    print("Romik")
     token = "vk1.a.Jx9Hqyr4HIjGO5QHHrF0bIlTsiNFB2Bv5Jdxm9bNsOBa9dvIUCECnv2cA9SjGyFGhkR8dRojqrHIUjw8gUga8QtACMHNZ656r4HKK_b_hhufu17cUn20XumQ4zll2aetLgFxttiwWx-o1c4Oy-YHdGna1BTxdj9oDOIfAvSAmZqqQ9aIc_ux4rRtL77T2mFAqP0TAuz-aD0ICXRrfdiImQ"
     # image = "D:/python/Mihaylov/photo/menu.png"
     
