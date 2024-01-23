@@ -8,6 +8,6 @@ app1 = botik()
 app2 = bot()
 
 if __name__ == "__main__":
-    with ProcessPoolExecutor(max_workers=1) as executor:
+    with ProcessPoolExecutor(max_workers=2) as executor:
         executor.submit(app1)
         executor.submit(app2)
