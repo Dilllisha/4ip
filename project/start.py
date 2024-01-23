@@ -4,16 +4,11 @@ from rom.bot import *
 import asyncio
 from multiprocessing import Process
 
-# def run():
-#     uvicorn.run(app, host="0.0.0.0", port=80)
-    
+app1 = botik()
+app2 = bot()
+
 if __name__ == "__main__":
-    Process(target=botik).start()
-    Process(target=bot).start()
-    # Process(target=run).start()
-    
-
-
-
-
-    
+    with
+    ProcessPoolExecutor(max_workers=2) as executor:
+        executor.submit(app1)
+        executor.submit(app2)
