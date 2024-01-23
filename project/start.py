@@ -1,13 +1,14 @@
 # from pa.app import *
 from vol.vkbot import *
 from rom.bot import *
-import asyncio
-from multiprocessing import Process
+from asyncio import create_task, run
 
-app1 = botik()
-app2 = bot()
+async def main():
+    task_1 = create_task(bot().start())
+    task_2 = create_task(botik().start())
 
-if __name__ == "__main__":
-    with ProcessPoolExecutor(max_workers=2) as executor:
-        executor.submit(app1)
-        executor.submit(app2)
+    await task_1
+    await task_2
+
+if __name__ == '__main__':
+    run(main())
