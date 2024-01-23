@@ -7,56 +7,43 @@ from vk_api.utils import get_random_id
 
 
 print("Romik")
-token = "vk1.a.Jx9Hqyr4HIjGO5QHHrF0bIlTsiNFB2Bv5Jdxm9bNsOBa9dvIUCECnv2cA9SjGyFGhkR8dRojqrHIUjw8gUga8QtACMHNZ656r4HKK_b_hhufu17cUn20XumQ4zll2aetLgFxttiwWx-o1c4Oy-YHdGna1BTxdj9oDOIfAvSAmZqqQ9aIc_ux4rRtL77T2mFAqP0TAuz-aD0ICXRrfdiImQ"
-# image = "D:/python/Mihaylov/photo/menu.png"
+vk_token = "vk1.a.Jx9Hqyr4HIjGO5QHHrF0bIlTsiNFB2Bv5Jdxm9bNsOBa9dvIUCECnv2cA9SjGyFGhkR8dRojqrHIUjw8gUga8QtACMHNZ656r4HKK_b_hhufu17cUn20XumQ4zll2aetLgFxttiwWx-o1c4Oy-YHdGna1BTxdj9oDOIfAvSAmZqqQ9aIc_ux4rRtL77T2mFAqP0TAuz-aD0ICXRrfdiImQ"
 
 
-session = vk_api.VkApi(token=token)
-longpoll = VkLongPoll(session)
-# upload = VkUpload(session)
-now = datetime.now()
-current_time = now.strftime("%H:%M")
-welcome = ["хай", "привет", "ку", "yo"]
-print("бот запущен", current_time)
+ssession = vk_api.VkApi(token=vk_token)
+longpolll = VkLongPoll(ssession)
+noww = datetime.now()
+cur = noww.strftime("%H:%M")
+print("бот запущен", cur)
 
-def sender(id, text, keyboard=None):
+def send(user, textt, keyb=None):
     post = {
-            "user_id": id,
-            "message": text,
+            "user_id": user,
+            "message": textt,
             "random_id": 0,
 
     }
 
-    if keyboard != None:
-        post["keyboard"] = keyboard.get_keyboard()
+    if keyb != None:
+        post["keyboard"] = keyb.get_keyboard()
     else:
         post = post
 
     session.method("messages.send", post)
 
-
-# def sender_photo(id, text ):
-#     post = {
-#         "user_id": id,
-#         "message": text,
-#         "random_id": 0,
-#         "attachment": ','.join(attachments)
-
-#     }
-#     session.method("messages.send", post)
 def botik():
-    for event in longpoll.listen():
+    for event in longpolll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
-            text = event.text.lower()
-            user_id = event.user_id
+            textt = event.text.lower()
+            user = event.user_id
     
-            if text in welcome:
+            if textt == "привет":
                 # attachments = []
                 # upload_image = upload.photo_messages(photos=image)[0]
                 # attachments.append('photo{}_{}'.format(upload_image['owner_id'], upload_image['id']))
-                sender(user_id, "хай")
+                send(user_id, "хай")
     
-            elif text == "меню":
+            elif textt == "меню":
     
                 keyboard = VkKeyboard()
                 #keyboard.add_location_button()
@@ -68,23 +55,23 @@ def botik():
                 for btn, btn_color in zip(button,button_colors):
                     keyboard.add_button(btn, btn_color)
     
-                sender(user_id, "Выберите что вам нужно:", keyboard)
+                send(user, "Выберите что вам нужно:", keyboard)
     
-            elif text == "что ты умеешь?":
+            elif textt == "что ты умеешь?":
     
-                keyboard = VkKeyboard()
+                keyb = VkKeyboard()
     
                 button = ["Что 1", "2", "3"]
                 button_colors = [VkKeyboardColor.POSITIVE, VkKeyboardColor.PRIMARY, VkKeyboardColor.NEGATIVE]
     
-                for btn, btn_color in zip(button,button_colors):
-                    keyboard.add_button(btn, btn_color)
+                for bt, bt_color in zip(button,button_colors):
+                    keyb.add_button(bt, bt_color)
     
-                sender(user_id, "Я умею..", keyboard)
+                send(user, "Я умею..", keyb)
     
             else:
     
-                sender(user_id, "Я вас не понимаю",)
+                send(user, "Я вас не понимаю",)
 
 
 
