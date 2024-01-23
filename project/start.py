@@ -1,5 +1,5 @@
 # from pa.app import *
-# from vol.vkbot import *
+from vol.vkbot import *
 from rom.bot import *
 import asyncio
 from multiprocessing import Process
@@ -9,8 +9,7 @@ from multiprocessing import Process
     
 if __name__ == "__main__":
     Process(target=botik).start()
-    print("ok")
-    # Process(target=bot).start()
+    Process(target=bot).start()
     # Process(target=run).start()
     
 
