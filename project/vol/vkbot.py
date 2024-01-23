@@ -75,7 +75,7 @@ def weathers(text):
 
 chat_gpt_button = False
 weather_button = False
-def bot():
+def bot(chat_gpt_button, weather_button):
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
             text = event.text.lower()
