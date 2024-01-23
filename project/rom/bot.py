@@ -5,33 +5,31 @@ from vk_api import VkUpload
 from datetime import datetime
 from vk_api.utils import get_random_id
 
-
-print("Romik")
-vk_token = "vk1.a.Jx9Hqyr4HIjGO5QHHrF0bIlTsiNFB2Bv5Jdxm9bNsOBa9dvIUCECnv2cA9SjGyFGhkR8dRojqrHIUjw8gUga8QtACMHNZ656r4HKK_b_hhufu17cUn20XumQ4zll2aetLgFxttiwWx-o1c4Oy-YHdGna1BTxdj9oDOIfAvSAmZqqQ9aIc_ux4rRtL77T2mFAqP0TAuz-aD0ICXRrfdiImQ"
-
-
-ssession = vk_api.VkApi(token=vk_token)
-longpolll = VkLongPoll(ssession)
-noww = datetime.now()
-cur = noww.strftime("%H:%M")
-print("бот запущен", cur)
-
-def send(user, textt, keyb=None):
-    post = {
-            "user_id": user,
-            "message": textt,
-            "random_id": 0,
-
-    }
-
-    if keyb != None:
-        post["keyboard"] = keyb.get_keyboard()
-    else:
-        post = post
-
-    session.method("messages.send", post)
-
 def botik():
+    print("Romik")
+    vk_token = "vk1.a.Jx9Hqyr4HIjGO5QHHrF0bIlTsiNFB2Bv5Jdxm9bNsOBa9dvIUCECnv2cA9SjGyFGhkR8dRojqrHIUjw8gUga8QtACMHNZ656r4HKK_b_hhufu17cUn20XumQ4zll2aetLgFxttiwWx-o1c4Oy-YHdGna1BTxdj9oDOIfAvSAmZqqQ9aIc_ux4rRtL77T2mFAqP0TAuz-aD0ICXRrfdiImQ"
+    
+    
+    ssession = vk_api.VkApi(token=vk_token)
+    longpolll = VkLongPoll(ssession)
+    noww = datetime.now()
+    cur = noww.strftime("%H:%M")
+    print("бот запущен", cur)
+    
+    def send(user, textt, keyb=None):
+        post = {
+                "user_id": user,
+                "message": textt,
+                "random_id": 0,
+    
+        }
+    
+        if keyb != None:
+            post["keyboard"] = keyb.get_keyboard()
+        else:
+            post = post
+    
+        session.method("messages.send", post)
     for event in longpolll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
             textt = event.text.lower()
