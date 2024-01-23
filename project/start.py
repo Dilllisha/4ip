@@ -8,7 +8,8 @@ from multiprocessing import Process
 #     uvicorn.run(app, host="0.0.0.0", port=80)
     
 if __name__ == "__main__":
-    # Process(target=botik).start()
+    Process(target=botik).start()
+    print("ok")
     # Process(target=bot).start()
     # Process(target=run).start()
     
