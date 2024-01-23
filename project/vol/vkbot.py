@@ -19,63 +19,63 @@ mgr = owm.weather_manager()
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
 
+def bot():
+    def sender(id, msg, keyboard=None):
+    
+        post = {
+            "user_id": id,
+            "message": msg,
+            "random_id": random_id,
+        }
+    
+        if keyboard != None:
+            post["keyboard"] = keyboard.get_keyboard()
+        else:
+            post = post
+    
+        session.method("messages.send", post)
+    
+    
+    print("Бот запущен -", current_time)
+    
+    def gpt(text):
+        try:
+            response = openai.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {'role': 'user', 'content': text}
+                ],
+                temperature=0
+            )
+            sender(user_id, response.choices[0].message.content)
+        except:
+            sender(user_id, "что-то пошло не так")
+    
+    
+    def weathers(text):
+        try:
+            observation = mgr.weather_at_place(text)
+            w = observation.weather
+            temperature = w.temperature('celsius')['temp']
+            weather = w.status.lower()
+            wind = w.wind()['speed']
+            humi = w.humidity
+            if weather == "snow":
+                weather = "снег"
+            elif weather == "clouds":
+                weather = "облачно"
+            elif weather == "rain":
+                weather = "дождь"
+    
+            ad = (f"По запросу города {text} найдено:\n Температура: {temperature}℃"
+                  f"\n Погода: {weather}\n Ветер: {wind} м/с\n Влажность: {humi}%")
+            sender(user_id, ad)
+        except:
+            sender(user_id, "Не получилось найти погоду по вашему городу")
+    
+    chat_gpt_button = False
+    weather_button = False
 
-def sender(id, msg, keyboard=None):
-
-    post = {
-        "user_id": id,
-        "message": msg,
-        "random_id": random_id,
-    }
-
-    if keyboard != None:
-        post["keyboard"] = keyboard.get_keyboard()
-    else:
-        post = post
-
-    session.method("messages.send", post)
-
-
-print("Бот запущен -", current_time)
-
-def gpt(text):
-    try:
-        response = openai.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {'role': 'user', 'content': text}
-            ],
-            temperature=0
-        )
-        sender(user_id, response.choices[0].message.content)
-    except:
-        sender(user_id, "что-то пошло не так")
-
-
-def weathers(text):
-    try:
-        observation = mgr.weather_at_place(text)
-        w = observation.weather
-        temperature = w.temperature('celsius')['temp']
-        weather = w.status.lower()
-        wind = w.wind()['speed']
-        humi = w.humidity
-        if weather == "snow":
-            weather = "снег"
-        elif weather == "clouds":
-            weather = "облачно"
-        elif weather == "rain":
-            weather = "дождь"
-
-        ad = (f"По запросу города {text} найдено:\n Температура: {temperature}℃"
-              f"\n Погода: {weather}\n Ветер: {wind} м/с\n Влажность: {humi}%")
-        sender(user_id, ad)
-    except:
-        sender(user_id, "Не получилось найти погоду по вашему городу")
-
-chat_gpt_button = False
-weather_button = False
-def bot(chat_gpt_button, weather_button):
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
             text = event.text.lower()
