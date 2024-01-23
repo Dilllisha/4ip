@@ -12,7 +12,7 @@ if __name__ == "__main__":
     Process(target=bot).start()
     # Process(target=run).start()
     
-print("Боты запущенны")
+
 
 
 
