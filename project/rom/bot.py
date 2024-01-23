@@ -29,7 +29,7 @@ def botik():
         else:
             post = post
     
-        session.method("messages.send", post)
+        ssession.method("messages.send", post)
     for event in longpolll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
             textt = event.text.lower()
@@ -39,7 +39,7 @@ def botik():
                 # attachments = []
                 # upload_image = upload.photo_messages(photos=image)[0]
                 # attachments.append('photo{}_{}'.format(upload_image['owner_id'], upload_image['id']))
-                send(user_id, "хай")
+                send(user, "хай")
     
             elif textt == "меню":
     
