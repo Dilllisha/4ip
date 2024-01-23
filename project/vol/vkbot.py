@@ -8,7 +8,7 @@ from pyowm.owm import OWM
 from datetime import datetime
 import openai
 
-def bot():
+
     print("Volodya")
     session = vk_api.VkApi(token="vk1.a.9wLYO2cuHKbWPZtWC51ssEzH12w-BIa_urRqKMM2E23COzqiWAZK8jOVPBeaVXHcWWDKCINwYg96pl0p_zw6uqMXfiddkTfu_ES7hgHydHfxgYbZrjv6jreK_qGM7Mf0DavzFaZFQIdzObNHPRM4X1pdxmZxu6fcDLvGKlGTperd3inqh6LYY9vHmVBWmwk4zl8Bb4iKYHWqiA-GkCgxYg")
     longpoll = VkLongPoll(session)
@@ -75,7 +75,7 @@ def bot():
     
     chat_gpt_button = False
     weather_button = False
-    
+    def bot():
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
             text = event.text.lower()
